@@ -27,9 +27,9 @@ public class AddNumberTestCases {
 		  assertEquals(15, AddNumbers.Add("1,2\n3,4\n5"));
 	}
  
-//	@Test
-//	public void ChangeDelimiterMultipleNumbersSeparatedByCommaAndNewLine() {
-//		String exString="//[***]\n1,2\n3,4\n5";  
-//		assertEquals(15, AddNumbers.Add(exString));
-//	}
+	@Test
+	public void ChangeDelimiterMultipleNumbersSeparatedByCommaAndNewLine() {
+		String exString="//[***]\n1***2\n3***4\n5";  
+		assertEquals(15, AddNumbers.Add(exString));
+	}
 }
