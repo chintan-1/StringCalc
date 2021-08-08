@@ -2,9 +2,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 import addition.AddNumbers;
 
@@ -41,6 +39,12 @@ public class AddNumberTestCases {
 	public void  NumbersBiggerThan1000ShouldBeIgnored() {
 		String exString="//[***]\n1***2000\n3***4\n1000";  
 		assertEquals(1008, a.Add(exString));
+	}
+	
+	@Test
+	public void  MulitpleDelimiters() {
+		String exString="//[***][%%%]\n1***2%%%3";  
+		assertEquals(6, a.Add(exString));
 	}
 	
 //	@SuppressWarnings("deprecation")

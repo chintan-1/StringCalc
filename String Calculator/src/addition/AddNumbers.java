@@ -1,7 +1,5 @@
 package addition;
 
-import java.util.ArrayList;
-
 public class AddNumbers {
 	
 	public int Add(String expression) {
@@ -11,10 +9,31 @@ public class AddNumbers {
 		if(expression.isBlank()) 
 			return 0;
 		else if(expression.startsWith("//")) {
-			String NewExpression=expression.substring(expression.indexOf("]")+1);
-			delimiterString+="|";
-			for(int i=expression.indexOf("[")+1;i<expression.indexOf("]");i++)
-				delimiterString+="\\"+expression.charAt(i);
+			String DelimiterExpression=expression.substring(2,expression.indexOf("\n"));
+			//System.out.println(DelimiterExpression);
+			String NewExpression=expression.substring(expression.indexOf("\n")+1);
+			//System.out.println(NewExpression);
+			char SpecialChar[]= {'*','[',']','{','}','?','(',')'};
+			while(!DelimiterExpression.isBlank()) {
+				delimiterString+="|";
+				int Start=1,End=DelimiterExpression.indexOf("]");
+				for(int i=Start;i<End;i++) {
+					char c=DelimiterExpression.charAt(i);
+					boolean flag=false;
+					for(char k:SpecialChar) {
+						if(c==k) {
+							flag=true;
+							break;
+						}
+					}
+					if(flag)
+						delimiterString+="\\"+DelimiterExpression.charAt(i);
+					else 
+						delimiterString+=DelimiterExpression.charAt(i);
+				}
+				DelimiterExpression=DelimiterExpression.substring(End+1);
+			}
+			//System.out.println(delimiterString);
 			numbersArr=NewExpression.split(delimiterString);
 			sum=Sum(numbersArr);
 		}
@@ -33,7 +52,6 @@ public class AddNumbers {
 				continue;
 			int n=Integer.parseInt(num);
 			if(n>1000) {
-				System.out.println(n);
 				continue;
 			}
 			if(n<0)
